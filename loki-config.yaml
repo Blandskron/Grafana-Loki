@@ -3,6 +3,11 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
+common:
+  path_prefix: /loki 
+  storage:
+    filesystem: {} 
+
 ingester:
   lifecycler:
     address: 127.0.0.1
@@ -16,20 +21,22 @@ ingester:
 schema_config:
   configs:
     - from: 2020-10-24
-      store: boltdb-shipper
+      store: tsdb  
       object_store: filesystem
-      schema: v11
+      schema: v13 
       index:
         prefix: index_
         period: 24h
 
 storage_config:
-  boltdb_shipper:
+  tsdb_shipper:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
-    shared_store: filesystem
 
 limits_config:
-  enforce_metric_name: false
+  allow_structured_metadata: false 
   reject_old_samples: true
   reject_old_samples_max_age: 168h
+
+compactor:
+  working_directory: /loki/compactor  

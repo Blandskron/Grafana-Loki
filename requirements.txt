@@ -1,0 +1,7 @@
+certifi==2025.1.31
+charset-normalizer==3.4.1
+idna==3.10
+python-logging-loki==0.3.1
+requests==2.32.3
+rfc3339==6.2
+urllib3==2.3.0

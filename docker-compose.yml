@@ -23,5 +23,12 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
+  fake-logs: # Nuevo servicio para ejecutar el script de logs
+    build: .
+    depends_on:
+      - loki
+    environment:
+      - LOKI_URL=http://loki:3100/loki/api/v1/push
+
 volumes:
   grafana-storage:
